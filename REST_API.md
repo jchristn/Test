@@ -15,12 +15,12 @@ Returns `200 OK` with no body.
 ### Health Check (GET)
 
 ```
-GET /
+GET /healthz
 ```
 
 Response `200 OK`:
 ```json
-{"status": "ok", "service": "user-api"}
+{"status": "ok", "name": "user-api"}
 ```
 
 ### Login

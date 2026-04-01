@@ -8,7 +8,7 @@ router = APIRouter(tags=["ops"])
 
 @router.get("/healthz")
 def healthz():
-    return {"status": "ok"}
+    return {"status": "ok", "name": "user-api"}
 
 
 @router.get("/readyz")
