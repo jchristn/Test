@@ -21,7 +21,11 @@ def readyz():
     except Exception as exc:
         return JSONResponse(
             status_code=503,
-            content={"status": "not_ready", "reason": str(exc)},
+            content={
+                "status": "not_ready",
+                "reason": str(exc),
+                "detail": str(exc),
+            },
         )
     return {
         "status": "ready",
