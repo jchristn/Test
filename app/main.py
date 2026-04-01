@@ -2,6 +2,7 @@ from fastapi import FastAPI, HTTPException, Response
 from app.models import LoginRequest
 from app.store import get_user_by_email
 from app.routes_users import router as users_router
+from app.routes_ops import router as ops_router
 
 app = FastAPI(
     title="User API",
@@ -10,6 +11,7 @@ app = FastAPI(
 )
 
 app.include_router(users_router)
+app.include_router(ops_router)
 
 
 @app.head("/")
