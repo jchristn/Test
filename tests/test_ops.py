@@ -28,6 +28,13 @@ def test_version_returns_service_metadata(client):
     }
 
 
+def test_version_includes_runtime_field(client):
+    version_payload = client.get("/version").json()
+
+    assert "runtime" in version_payload
+    assert version_payload["runtime"] == "fastapi"
+
+
 def test_version_returns_stable_status_with_service_identity(client):
     version_payload = client.get("/version").json()
 

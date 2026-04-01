@@ -18,9 +18,9 @@ def test_readyz_returns_503_when_store_unavailable(client):
     assert resp.status_code == 503
     data = resp.json()
     assert data["status"] == "not_ready"
-    assert "store down" in data["reason"]
+    assert data["reason"] == "store down"
     assert "detail" in data
-    assert "store down" in data["detail"]
+    assert data["detail"] == data["reason"]
 
 
 def test_readyz_returns_503_on_generic_exception(client):
