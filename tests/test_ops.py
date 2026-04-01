@@ -19,7 +19,12 @@ def test_healthz_returns_same_service_name_as_version(client):
 def test_version_returns_service_metadata(client):
     resp = client.get("/version")
     assert resp.status_code == 200
-    assert resp.json() == {"version": "1.0.0", "name": "user-api", "status": "stable"}
+    assert resp.json() == {
+        "version": "1.0.0",
+        "name": "user-api",
+        "status": "stable",
+        "runtime": "fastapi",
+    }
 
 
 def test_version_returns_stable_status_with_service_identity(client):
@@ -28,3 +33,4 @@ def test_version_returns_stable_status_with_service_identity(client):
     assert version_payload["status"] == "stable"
     assert version_payload["name"] == "user-api"
     assert version_payload["version"] == "1.0.0"
+    assert version_payload["runtime"] == "fastapi"

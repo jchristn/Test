@@ -31,4 +31,9 @@ def readyz():
 
 @router.get("/version")
 def version():
-    return {"version": "1.0.0", "name": "user-api", "status": "stable"}
+    return {
+        "version": "1.0.0",
+        "name": "user-api",
+        "status": "stable",
+        "runtime": "fastapi",
+    }
