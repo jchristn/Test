@@ -23,6 +23,17 @@ Response `200 OK`:
 {"status": "ok", "name": "user-api"}
 ```
 
+### Version (GET)
+
+```
+GET /version
+```
+
+Response `200 OK`:
+```json
+{"version": "1.0.0", "name": "user-api", "status": "stable"}
+```
+
 ### Login
 
 ```
