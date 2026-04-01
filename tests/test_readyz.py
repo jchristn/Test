@@ -20,6 +20,7 @@ def test_readyz_returns_503_when_store_unavailable(client):
     assert data["status"] == "not_ready"
     assert "store down" in data["reason"]
     assert "store down" in data["detail"]
+    assert data["detail"] == data["reason"]
 
 
 def test_readyz_returns_503_on_generic_exception(client):
