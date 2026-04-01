@@ -29,6 +29,8 @@ Response `200 OK`:
 GET /readyz
 ```
 
+When the store is unavailable, `GET /readyz` returns `503 Service Unavailable` with a `reason` field.
+
 Response `200 OK`:
 ```json
 {"status": "ready", "uptime_seconds": 12.34}
