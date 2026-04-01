@@ -20,3 +20,11 @@ def test_version_returns_service_metadata(client):
     resp = client.get("/version")
     assert resp.status_code == 200
     assert resp.json() == {"version": "1.0.0", "name": "user-api", "status": "stable"}
+
+
+def test_version_returns_stable_status_with_service_identity(client):
+    version_payload = client.get("/version").json()
+
+    assert version_payload["status"] == "stable"
+    assert version_payload["name"] == "user-api"
+    assert version_payload["version"] == "1.0.0"
