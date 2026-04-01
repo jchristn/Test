@@ -20,7 +20,7 @@ GET /healthz
 
 Response `200 OK`:
 ```json
-{"status": "ok", "name": "user-api"}
+{"status": "ok", "name": "user-api", "version": "1.0.0"}
 ```
 
 ### Readiness Check (GET)

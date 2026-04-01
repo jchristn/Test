@@ -11,7 +11,7 @@ PROCESS_START_TIME = time.monotonic()
 
 @router.get("/healthz")
 def healthz():
-    return {"status": "ok", "name": "user-api"}
+    return {"status": "ok", "name": "user-api", "version": "1.0.0"}
 
 
 @router.get("/readyz")
