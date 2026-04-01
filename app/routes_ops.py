@@ -1,9 +1,12 @@
+import time
+
 from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 
 from app.store import list_users
 
 router = APIRouter(tags=["ops"])
+PROCESS_START_TIME = time.monotonic()
 
 
 @router.get("/healthz")
@@ -20,7 +23,10 @@ def readyz():
             status_code=503,
             content={"status": "not_ready", "reason": str(exc)},
         )
-    return {"status": "ready"}
+    return {
+        "status": "ready",
+        "uptime_seconds": time.monotonic() - PROCESS_START_TIME,
+    }
 
 
 @router.get("/version")

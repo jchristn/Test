@@ -23,6 +23,22 @@ Response `200 OK`:
 {"status": "ok", "name": "user-api"}
 ```
 
+### Readiness Check (GET)
+
+```
+GET /readyz
+```
+
+Response `200 OK`:
+```json
+{"status": "ready", "uptime_seconds": 12.34}
+```
+
+Response `503 Service Unavailable`:
+```json
+{"status": "not_ready", "reason": "store down"}
+```
+
 ### Version (GET)
 
 ```

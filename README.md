@@ -39,6 +39,7 @@ Protected endpoints use HTTP Basic authentication. Supply any valid user's email
 ## Operations
 
 Production-safe endpoints are available at `/healthz`, `/readyz`, and `/version`.
+`GET /readyz` returns readiness plus process uptime in seconds.
 
 ```bash
 curl http://localhost:8000/healthz
