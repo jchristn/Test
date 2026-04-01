@@ -35,6 +35,7 @@ The API comes with a pre-seeded admin user:
 ## Authentication
 
 Protected endpoints use HTTP Basic authentication. Supply any valid user's email and password.
+`POST /login` returns HTTP 422 when either `email` or `password` is omitted from the request body.
 
 ## Operations
 
