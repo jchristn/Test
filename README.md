@@ -36,6 +36,14 @@ The API comes with a pre-seeded admin user:
 
 Protected endpoints use HTTP Basic authentication. Supply any valid user's email and password.
 
+## Operations
+
+Production-safe endpoints are available at `/healthz`, `/readyz`, and `/version`.
+
+```bash
+curl http://localhost:8000/healthz
+```
+
 ## License
 
 [MIT](LICENSE.md)
