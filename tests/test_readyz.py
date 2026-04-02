@@ -8,6 +8,8 @@ def test_readyz_returns_ready(client):
     assert resp.status_code == 200
     data = resp.json()
     assert data["status"] == "ready"
+    assert data["name"] == "user-api"
+    assert data["version"] == "1.0.0"
     assert isinstance(data["uptime_seconds"], (int, float))
     assert data["uptime_seconds"] >= 0
 
