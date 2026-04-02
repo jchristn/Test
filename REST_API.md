@@ -29,9 +29,11 @@ Response `200 OK`:
 GET /readyz
 ```
 
+Returns readiness status together with the service name, version, and process uptime in seconds.
+
 Response `200 OK`:
 ```json
-{"status": "ready", "uptime_seconds": 12.34}
+{"status": "ready", "name": "user-api", "version": "1.0.0", "uptime_seconds": 12.34}
 ```
 
 Response `503 Service Unavailable`:
