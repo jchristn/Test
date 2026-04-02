@@ -4,12 +4,19 @@ from unittest.mock import patch
 
 
 def test_readyz_returns_ready(client):
-    resp = client.get("/readyz")
+    with patch("app.routes_ops.list_users") as mock_list_users, patch(
+        "app.routes_ops.PROCESS_START_TIME", 100.0
+    ), patch("app.routes_ops.time.monotonic", return_value=123.5):
+        resp = client.get("/readyz")
+
     assert resp.status_code == 200
-    data = resp.json()
-    assert data["status"] == "ready"
-    assert isinstance(data["uptime_seconds"], (int, float))
-    assert data["uptime_seconds"] >= 0
+    assert resp.json() == {
+        "status": "ready",
+        "name": "user-api",
+        "version": "1.0.0",
+        "uptime_seconds": 23.5,
+    }
+    mock_list_users.assert_called_once_with()
 
 
 def test_readyz_returns_503_when_store_unavailable(client):

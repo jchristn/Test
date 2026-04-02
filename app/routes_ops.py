@@ -25,6 +25,8 @@ def readyz():
         )
     return {
         "status": "ready",
+        "name": "user-api",
+        "version": "1.0.0",
         "uptime_seconds": time.monotonic() - PROCESS_START_TIME,
     }
 
