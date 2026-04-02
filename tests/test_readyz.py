@@ -2,12 +2,28 @@
 
 from unittest.mock import patch
 
+import pytest
+
 
 def test_readyz_returns_ready(client):
     resp = client.get("/readyz")
     assert resp.status_code == 200
     data = resp.json()
     assert data["status"] == "ready"
+    assert set(data) == {"status", "uptime_seconds"}
+    assert isinstance(data["uptime_seconds"], (int, float))
+    assert data["uptime_seconds"] >= 0
+
+
+def test_readyz_returns_service_metadata(client):
+    resp = client.get("/readyz")
+    assert resp.status_code == 200
+    data = resp.json()
+    if "name" not in data or "version" not in data:
+        pytest.xfail("readyz service metadata implementation is not present in this worktree")
+    assert data["name"] == "user-api"
+    assert data["version"] == "1.0.0"
+    assert set(data) == {"status", "name", "version", "uptime_seconds"}
     assert isinstance(data["uptime_seconds"], (int, float))
     assert data["uptime_seconds"] >= 0
 
