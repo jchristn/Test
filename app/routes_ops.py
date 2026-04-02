@@ -7,11 +7,17 @@ from app.store import list_users
 
 router = APIRouter(tags=["ops"])
 PROCESS_START_TIME = time.monotonic()
+SERVICE_NAME = "user-api"
+SERVICE_VERSION = "1.0.0"
+
+
+def _service_metadata(status: str):
+    return {"status": status, "name": SERVICE_NAME, "version": SERVICE_VERSION}
 
 
 @router.get("/healthz")
 def healthz():
-    return {"status": "ok", "name": "user-api", "version": "1.0.0"}
+    return _service_metadata("ok")
 
 
 @router.get("/readyz")
@@ -24,7 +30,7 @@ def readyz():
             content={"status": "not_ready", "reason": str(exc)},
         )
     return {
-        "status": "ready",
+        **_service_metadata("ready"),
         "uptime_seconds": time.monotonic() - PROCESS_START_TIME,
     }
 
@@ -32,8 +38,8 @@ def readyz():
 @router.get("/version")
 def version():
     return {
-        "version": "1.0.0",
-        "name": "user-api",
+        "version": SERVICE_VERSION,
+        "name": SERVICE_NAME,
         "status": "stable",
         "runtime": "fastapi",
     }

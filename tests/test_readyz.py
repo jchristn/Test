@@ -11,7 +11,14 @@ def test_readyz_returns_ready(client):
     assert data["name"] == "user-api"
     assert data["version"] == "1.0.0"
     assert isinstance(data["uptime_seconds"], (int, float))
+    assert not isinstance(data["uptime_seconds"], bool)
     assert data["uptime_seconds"] >= 0
+
+
+def test_readyz_returns_documented_contract_fields(client):
+    resp = client.get("/readyz")
+    assert resp.status_code == 200
+    assert set(resp.json()) == {"status", "name", "version", "uptime_seconds"}
 
 
 def test_readyz_returns_503_when_store_unavailable(client):
